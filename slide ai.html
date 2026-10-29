@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="km" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSlide Pro - វេទិកាស្លាយសិក្សាវ័យឆ្លាតជាមួយ AI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter & Suwannaphum for Khmer) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Suwannaphum:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Suwannaphum', 'sans-serif'],
+                        khmer: ['Suwannaphum', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Suwannaphum', 'Inter', sans-serif; }
+        .slide-preview-card:hover .overlay-actions { opacity: 1; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-pink-500 flex items-center justify-center text-white text-2xl shadow-md">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent">EduSlide Pro</span>
+                    <p class="text-xs text-slate-500 font-khmer">វេទិកាស្លាយសិក្សាជាមួយ AI សម្រាប់និស្សិត</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="#home" class="text-indigo-600 hover:text-indigo-700 transition">ទំព័រដើម</a>
+                <a href="#templates" class="text-slate-600 hover:text-indigo-600 transition">បណ្តុំស្លាយគំរូ</a>
+                <a href="#customizer" class="text-slate-600 hover:text-indigo-600 transition">កែច្នៃស្លាយ & AI Studio</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openCustomizerModal()" class="hidden sm:flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium shadow-lg shadow-indigo-200 transition transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>បង្កើតស្លាយជាមួយ AI</span>
+                </button>
+                <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden border-2 border-indigo-500 flex items-center justify-center text-slate-700 font-bold">
+                    <span>NS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section id="home" class="relative overflow-hidden bg-gradient-to-b from-indigo-50/50 via-white to-slate-50 py-16 lg:py-24 border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <span class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-100 text-indigo-700 text-sm font-semibold tracking-wide">
+                            <i class="fa-solid fa-robot text-indigo-600"></i>
+                            <span>បំពាក់ដោយ AI Assistant & មុខងារបន្ថែមទំព័រស្វ័យប្រវត្តិ</span>
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                            បង្កើតបទបង្ហាញសិក្សា <br><span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">ឆ្លាតវៃ ទាន់សម័យ & ងាយស្រួល</span>
+                        </h1>
+                        <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
+                            ជម្រើសស្លាយគំរូជាង 200+ ជាមួយប្រព័ន្ធបន្ថែមទំព័រច្រើន (Multi-page slides) ដាក់រូបភាពផ្ទាល់ខ្លួន និងជំនួយការ AI ក្នុងការបង្កើតអត្ថបទ PDF Export យ៉ាងរលូន។
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                            <a href="#templates" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-xl shadow-indigo-200 hover:shadow-indigo-300 transition text-center flex items-center justify-center space-x-3">
+                                <i class="fa-solid fa-compass text-lg"></i>
+                                <span>ស្វែងរកស្លាយគំរូ</span>
+                            </a>
+                            <a href="#customizer" class="w-full sm:w-auto bg-white border-2 border-slate-200 text-slate-700 hover:border-indigo-600 hover:text-indigo-600 font-semibold px-8 py-4 rounded-2xl transition text-center flex items-center justify-center space-x-3">
+                                <i class="fa-solid fa-sliders text-lg"></i>
+                                <span>សាកល្បងកែច្នៃស្លាយ & AI</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Hero Visual -->
+                    <div class="lg:col-span-5">
+                        <div class="relative mx-auto max-w-md bg-white p-4 rounded-3xl shadow-2xl border border-slate-100 transform rotate-1 hover:rotate-0 transition duration-300">
+                            <div class="bg-gradient-to-br from-indigo-600 to-pink-600 rounded-2xl p-6 text-white shadow-inner min-h-[260px] flex flex-col justify-between">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">EduSlide AI Engine v2.0</span>
+                                    <i class="fa-solid fa-sparkles text-pink-200"></i>
+                                </div>
+                                <div class="space-y-2 my-auto">
+                                    <h3 class="text-2xl font-bold">ប្រព័ន្ធគ្រប់គ្រងស្លាយ និង PDF Export</h3>
+                                    <p class="text-sm text-indigo-100">បន្ថែមទំព័រ ដាក់រូបភាព និងជំនួយការ AI ភ្លាមៗ</p>
+                                </div>
+                                <div class="flex justify-between items-center pt-4 border-t border-white/20 text-xs text-indigo-100">
+                                    <span>មុខងារទំនើបសម្រាប់និស្សិត</span>
+                                    <span>PDF / PPTX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Template Section -->
+        <section id="templates" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-900">បណ្តុំស្លាយគំរូតាមស្ទីល Anime, Kitty & ជំនាញផ្សេងៗ (20-50 គំរូក្នុងមួយជំនាញ)</h2>
+                    <p class="text-slate-600 mt-2">ជ្រើសរើសប្រភេទស្ទីល Cute Anime, Hello Kitty, Sweet, Simple, Professional និងជំនាញសិក្សាគ្រប់ប្រភេទ</p>
+                </div>
+                <div class="mt-4 md:mt-0 relative w-full md:w-72">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input type="text" id="searchInput" onkeyup="filterTemplates()" placeholder="ស្វែងរកចំណងជើង ឬជំនាញ..." class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm shadow-sm">
+                </div>
+            </div>
+
+            <!-- Style Filter Tabs -->
+            <div class="flex flex-wrap gap-3 mb-8">
+                <button onclick="filterStyle('all')" class="style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-indigo-600 text-white shadow-md shadow-indigo-100">ទាំងអស់ (All)</button>
+                <button onclick="filterStyle('anime')" class="style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-white border border-slate-200 text-slate-700 hover:bg-pink-50 hover:text-pink-600">💖 Anime & Kitty ស្ទីលតុក្កតា</button>
+                <button onclick="filterStyle('cute')" class="style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-white border border-slate-200 text-slate-700 hover:bg-pink-50 hover:text-pink-600">🐰 Cute ស្ទីលឃ្យូតៗ</button>
+                <button onclick="filterStyle('sweet')" class="style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-white border border-slate-200 text-slate-700 hover:bg-purple-50 hover:text-purple-600">🌸 Sweet ស្ទីលទន់ភ្លន់</button>
+                <button onclick="filterStyle('simple')" class="style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-white border border-slate-200 text-slate-700 hover:bg-slate-100">✨ Simple សាមញ្ញស្អាត</button>
+                <button onclick="filterStyle('professional')" class="style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-white border border-slate-200 text-slate-700 hover:bg-blue-50 hover:text-blue-600">💼 Professional ជំនាញការ</button>
+            </div>
+
+            <!-- Major Filter Pills -->
+            <div class="flex flex-wrap gap-2 mb-10 pb-2 border-b border-slate-200 text-xs">
+                <span class="self-center font-bold text-slate-500 mr-2"><i class="fa-solid fa-graduation-cap"></i> ជំនាញសិក្សា៖</span>
+                <button onclick="filterMajor('all')" class="major-btn bg-slate-900 text-white px-3.5 py-1.5 rounded-lg transition font-medium">គ្រប់ជំនាញ</button>
+                <button onclick="filterMajor('it')" class="major-btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 px-3.5 py-1.5 rounded-lg transition font-medium">បច្ចេកវិទ្យាព័ត៌មាន (IT - 45 គំរូ)</button>
+                <button onclick="filterMajor('business')" class="major-btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 px-3.5 py-1.5 rounded-lg transition font-medium">អាជីវកម្ម (Business - 50 គំរូ)</button>
+                <button onclick="filterMajor('medical')" class="major-btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 px-3.5 py-1.5 rounded-lg transition font-medium">វេជ្ជសាស្ត្រ (Medical - 30 គំរូ)</button>
+                <button onclick="filterMajor('engineering')" class="major-btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 px-3.5 py-1.5 rounded-lg transition font-medium">វិស្វកម្ម (Engineering - 35 គំរូ)</button>
+            </div>
+
+            <!-- Templates Grid -->
+            <div id="templateGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: Anime & Kitty -->
+                <div class="template-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between" data-style="anime" data-major="it">
+                    <div class="relative bg-gradient-to-br from-pink-300 via-rose-300 to-purple-400 p-6 text-white min-h-[200px] flex flex-col justify-between slide-preview-card">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-white/30 px-3 py-1 rounded-full font-semibold">🌸 Anime / Kitty • Canva Style</span>
+                            <span class="bg-pink-100 text-pink-700 text-xs px-2.5 py-1 rounded-full font-bold">គំរូ ០១/៥០</span>
+                        </div>
+                        <div class="my-4">
+                            <h4 class="text-xl font-bold">Kawaii Tech Presentation & Anime UI</h4>
+                            <p class="text-xs text-pink-50 mt-1">ស្ទីលតុក្កតាឃ្យូតៗ ពណ៌ផ្កាឈូកទន់ភ្លន់ ពេញនិយមលើ Canva</p>
+                        </div>
+                        <div class="overlay-actions absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition duration-300 flex items-center justify-center space-x-3">
+                            <button onclick="useTemplate('Kawaii Tech Presentation & Anime UI')" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-700 transition"><i class="fa-solid fa-pen-to-square"></i> យកទៅកែច្នៃ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="template-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between" data-style="cute" data-major="it">
+                    <div class="relative bg-gradient-to-br from-pink-400 to-purple-500 p-6 text-white min-h-[200px] flex flex-col justify-between slide-preview-card">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-white/25 px-3 py-1 rounded-full font-semibold">Cute • IT</span>
+                            <span class="bg-pink-100 text-pink-600 text-xs px-2.5 py-1 rounded-full font-bold">គំរូ ០២/៤៥</span>
+                        </div>
+                        <div class="my-4">
+                            <h4 class="text-xl font-bold">UI/UX Design & Mobile App Concept</h4>
+                            <p class="text-xs text-pink-100 mt-1">រចនាបទឃ្យូត សម្រាប់ការពារប្រធានបទឆ្នាំទី៤</p>
+                        </div>
+                        <div class="overlay-actions absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition duration-300 flex items-center justify-center space-x-3">
+                            <button onclick="useTemplate('UI/UX Design & Mobile App Concept')" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-700 transition"><i class="fa-solid fa-pen-to-square"></i> យកទៅកែច្នៃ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="template-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between" data-style="sweet" data-major="business">
+                    <div class="relative bg-gradient-to-br from-purple-400 to-indigo-500 p-6 text-white min-h-[200px] flex flex-col justify-between slide-preview-card">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-white/25 px-3 py-1 rounded-full font-semibold">Sweet • Business</span>
+                            <span class="bg-purple-100 text-purple-700 text-xs px-2.5 py-1 rounded-full font-bold">គំរូ ០៣/៥០</span>
+                        </div>
+                        <div class="my-4">
+                            <h4 class="text-xl font-bold">Startup Business Plan & Strategy</h4>
+                            <p class="text-xs text-purple-100 mt-1">ស្ទីលទន់ភ្លន់ សាកសមសម្រាប់ការបង្ហាញផែនការអាជីវកម្ម</p>
+                        </div>
+                        <div class="overlay-actions absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition duration-300 flex items-center justify-center space-x-3">
+                            <button onclick="useTemplate('Startup Business Plan & Strategy')" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-700 transition"><i class="fa-solid fa-pen-to-square"></i> យកទៅកែច្នៃ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="template-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between" data-style="simple" data-major="medical">
+                    <div class="relative bg-gradient-to-br from-teal-400 to-cyan-600 p-6 text-white min-h-[200px] flex flex-col justify-between slide-preview-card">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-white/25 px-3 py-1 rounded-full font-semibold">Simple • Medical</span>
+                            <span class="bg-teal-100 text-teal-800 text-xs px-2.5 py-1 rounded-full font-bold">គំរូ ០៤/៣០</span>
+                        </div>
+                        <div class="my-4">
+                            <h4 class="text-xl font-bold">សុខភាពសាធារណៈ & ការស្រាវជ្រាវរោគសញ្ញា</h4>
+                            <p class="text-xs text-teal-100 mt-1">ស្ទីលសាមញ្ញស្អាត ងាយយល់ និងទាក់ទាញ</p>
+                        </div>
+                        <div class="overlay-actions absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition duration-300 flex items-center justify-center space-x-3">
+                            <button onclick="useTemplate('សុខភាពសាធារណៈ & ការស្រាវជ្រាវរោគសញ្ញា')" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-700 transition"><i class="fa-solid fa-pen-to-square"></i> យកទៅកែច្នៃ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Customizer & AI Studio Section -->
+        <section id="customizer" class="py-16 bg-white border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-indigo-600 font-bold text-sm uppercase tracking-wider bg-indigo-50 px-3 py-1 rounded-full"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Studio & Multi-Page Customizer</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-3">កែសម្រួលស្លាយ បន្ថែមទំព័រ ដាក់រូបភាព និងជំនួយការ AI</h2>
+                    <p class="text-slate-600 mt-2">អ្នកអាចបន្ថែមទំព័រជាច្រើន (Page 1, 2, 3...) ដាក់ URL រូបភាព និងប្រើប្រាស់ AI ជួយបង្កើតមាតិកា ព្រមទាំងរក្សាទុកជា PDF ឬ PPTX ។</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Form / Control Column -->
+                    <div class="lg:col-span-5 bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+                        
+                        <!-- AI Assistant Box -->
+                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-2xl text-white space-y-3 shadow-md">
+                            <div class="flex items-center space-x-2 font-bold text-sm">
+                                <i class="fa-solid fa-robot text-lg"></i>
+                                <span>EduSlide AI Assistant (ជំនួយការឆ្លាតវៃ)</span>
+                            </div>
+                            <p class="text-xs text-indigo-100">បញ្ចូលប្រធានបទ រួចឱ្យ AI ជួយសរសេរខ្លឹមសារស្លាយជូនអ្នកស្វ័យប្រវត្តិ៖</p>
+                            <div class="flex space-x-2">
+                                <input type="text" id="aiPromptInput" placeholder="ឧ. បញ្ហាប្រឈមនៃ AI ក្នុងវិស័យអប់រំ..." class="w-full px-3 py-2 rounded-xl text-slate-800 text-xs focus:outline-none">
+                                <button onclick="generateContentWithAI()" class="bg-white text-indigo-600 px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-50 transition shadow">បង្កើត</button>
+                            </div>
+                        </div>
+
+                        <!-- Multi-Page Navigation Bar inside Form -->
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-sm font-bold text-slate-900"><i class="fa-solid fa-layer-group text-indigo-600"></i> គ្រប់គ្រងទំព័រ (Pages)</span>
+                            <div class="flex items-center space-x-2">
+                                <span id="pageIndicator" class="text-xs font-bold bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">ទំព័រទី 1 / 1</span>
+                                <button onclick="addNewSlidePage()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold transition flex items-center space-x-1">
+                                    <i class="fa-solid fa-plus"></i> <span>បន្ថែមទំព័រ</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Page Selector Tabs -->
+                        <div id="pageTabsContainer" class="flex flex-wrap gap-2">
+                            <!-- Dynamically populated page tabs -->
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">ចំណងជើងទំព័របច្ចុប្បន្ន (Page Title)</label>
+                            <input type="text" id="inputTitle" oninput="updateCurrentSlideData()" class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">ខ្លឹមសារទំព័រ (Content / Points)</label>
+                            <textarea id="inputContent" rows="3" oninput="updateCurrentSlideData()" class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">តំណភ្ជាប់រូបភាព (Image URL - ស្រេចចិត្ត)</label>
+                            <input type="text" id="inputImageUrl" placeholder="https://example.com/image.jpg" oninput="updateCurrentSlideData()" class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">ស្ទីលពណ៌ស្លាយ (Theme Style)</label>
+                            <select id="inputStyle" onchange="updateCurrentSlideData()" class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm">
+                                <option value="anime">🌸 Anime & Kitty ស្ទីលតុក្កតា (Pink/Rose)</option>
+                                <option value="cute">🐰 Cute ឃ្យូតៗ (Pink/Purple)</option>
+                                <option value="sweet">🌸 Sweet ទន់ភ្លន់ (Indigo/Pink)</option>
+                                <option value="simple">✨ Simple សាមញ្ញស្អាត (Slate/Clean)</option>
+                                <option value="professional">💼 Professional ជំនាញការ (Dark/Blue)</option>
+                            </select>
+                        </div>
+
+                        <!-- Action Export Buttons -->
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button onclick="downloadAsPDF()" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center space-x-2 text-xs">
+                                <i class="fa-solid fa-file-pdf text-red-400"></i>
+                                <span>រក្សាទុក PDF</span>
+                            </button>
+                            <button onclick="downloadCustomSlide()" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center space-x-2 text-xs shadow-md">
+                                <i class="fa-solid fa-file-powerpoint text-orange-300"></i>
+                                <span>ទាញយក PPTX</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Preview Column -->
+                    <div class="lg:col-span-7 bg-slate-900 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between min-h-[500px]">
+                        <div class="flex justify-between items-center pb-4 border-b border-slate-800 text-slate-400 text-xs">
+                            <span class="flex items-center space-x-2"><i class="fa-solid fa-circle text-red-500 text-[8px]"></i><i class="fa-solid fa-circle text-yellow-500 text-[8px]"></i><i class="fa-solid fa-circle text-green-500 text-[8px]"></i> <span class="ml-2 font-mono">EduSlide Live Multi-Page Preview</span></span>
+                            <span id="previewPageIndicator" class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full font-bold">ទំព័រ 1</span>
+                        </div>
+
+                        <!-- Slide Screen Container -->
+                        <div id="liveSlideBox" class="my-6 bg-gradient-to-br from-pink-300 via-rose-300 to-purple-400 rounded-2xl p-8 text-white shadow-2xl flex flex-col justify-between min-h-[320px] transition duration-500 relative overflow-hidden">
+                            
+                            <!-- Optional Image Overlay if provided -->
+                            <div id="previewImageWrapper" class="hidden mb-4 rounded-xl overflow-hidden max-h-36 bg-black/20">
+                                <img id="previewImage" src="" alt="Slide Image" class="w-full h-32 object-cover">
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span id="previewTagBadge" class="text-xs bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm font-medium">Anime Theme</span>
+                                <i class="fa-solid fa-graduation-cap text-white/80 text-xl"></i>
+                            </div>
+                            <div class="space-y-3 my-auto">
+                                <h3 id="previewTitle" class="text-2xl sm:text-3xl font-bold leading-snug">Kawaii Tech Presentation & Anime UI</h3>
+                                <p id="previewContent" class="text-sm text-pink-50 whitespace-pre-line">1. ការយល់ដឹងពីស្ទីល Anime & Kitty&#10;2. ការរចនាបែប Canva Preset&#10;3. ការដាក់បញ្ចូលរូបភាពតុក្កតា</p>
+                            </div>
+                            <div class="flex justify-between items-center pt-4 border-t border-white/20 text-xs text-pink-50">
+                                <span id="previewFooterAuthor">EduSlide Pro - វេទិកាស្លាយសិក្សា</span>
+                                <span id="previewPageNumBadge">ទំព័រទី 1</span>
+                            </div>
+                        </div>
+
+                        <!-- Navigation controls between pages in preview -->
+                        <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
+                            <button onclick="prevPage()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl transition flex items-center space-x-1"><i class="fa-solid fa-arrow-left"></i> <span>ទំព័រមុន</span></button>
+                            <span id="pageCountStatus" class="text-slate-300 font-bold">សរុបមាន ១ ទំព័រ</span>
+                            <button onclick="nextPage()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl transition flex items-center space-x-1"><span>ទំព័របន្ទាប់</span> <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-xl">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <span class="text-white font-bold text-lg">EduSlide Pro</span>
+            </div>
+            <p class="text-sm text-center">រក្សាសិទ្ធិ © 2026 EduSlide Pro - វេទិកាស្លាយសិក្សាវ័យឆ្លាតសម្រាប់និស្សិតកម្ពុជា។</p>
+            <div class="flex space-x-4 text-lg">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification / Modal Overlay Box -->
+    <div id="notificationModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl text-center space-y-4 transform scale-95 transition-all duration-300">
+            <div id="modalIcon" class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-check-circle"></i>
+            </div>
+            <h3 id="modalTitle" class="text-xl font-bold text-slate-900">ជោគជ័យ!</h3>
+            <p id="modalMessage" class="text-slate-600 text-sm">ស្លាយរបស់អ្នកត្រូវបានរក្សាទុកជា PDF និងរៀបចំរួចរាល់។</p>
+            <button onclick="closeNotificationModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition">យល់ព្រម (OK)</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic with Multi-Page & AI Support -->
+    <script>
+        // Multi-page Slide State Structure
+        let slidesData = [
+            {
+                title: "Kawaii Tech Presentation & Anime UI",
+                content: "1. ការយល់ដឹងពីស្ទីល Anime & Kitty\n2. ការរចនាបែប Canva Preset\n3. ការដាក់បញ្ចូលរូបភាពតុក្កតា",
+                imageUrl: "",
+                style: "anime"
+            }
+        ];
+        let currentSlideIndex = 0;
+
+        // Initialize on load
+        window.onload = function() {
+            renderPageTabs();
+            loadSlideToForm(0);
+        };
+
+        // Render page tabs in the customizer
+        function renderPageTabs() {
+            const container = document.getElementById('pageTabsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            slidesData.forEach((slide, index) => {
+                const btn = document.createElement('button');
+                btn.className = `px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1 ${index === currentSlideIndex ? 'bg-indigo-600 text-white shadow' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'}`;
+                btn.innerHTML = `<span>ទំព័រ ${index + 1}</span>`;
+                btn.onclick = () => switchPage(index);
+                container.appendChild(btn);
+            });
+
+            // Update indicators
+            document.getElementById('pageIndicator').innerText = `ទំព័រទី ${currentSlideIndex + 1} / ${slidesData.length}`;
+            document.getElementById('previewPageIndicator').innerText = `ទំព័រ ${currentSlideIndex + 1}`;
+            document.getElementById('previewPageNumBadge').innerText = `ទំព័រទី ${currentSlideIndex + 1} នៃ ${slidesData.length}`;
+            document.getElementById('pageCountStatus').innerText = `សរុបមាន ${slidesData.length} ទំព័រ`;
+        }
+
+        // Switch to a specific page
+        function switchPage(index) {
+            currentSlideIndex = index;
+            loadSlideToForm(index);
+            renderPageTabs();
+            updateLiveSlidePreview();
+        }
+
+        // Load slide data into form inputs
+        function loadSlideToForm(index) {
+            const slide = slidesData[index];
+            if (!slide) return;
+            document.getElementById('inputTitle').value = slide.title || '';
+            document.getElementById('inputContent').value = slide.content || '';
+            document.getElementById('inputImageUrl').value = slide.imageUrl || '';
+            document.getElementById('inputStyle').value = slide.style || 'anime';
+        }
+
+        // Add new slide page
+        function addNewSlidePage() {
+            slidesData.push({
+                title: `ចំណងជើងទំព័រទី ${slidesData.length + 1}`,
+                content: "1. ចុចទីនេះដើម្បីសរសេរខ្លឹមសារ...\n2. អាចបន្ថែមចំណុចសំខាន់ៗនៅទីនេះ",
+                imageUrl: "",
+                style: slidesData[slidesData.length - 1]?.style || 'anime'
+            });
+            switchPage(slidesData.length - 1);
+            showModal("បានបន្ថែមទំព័រថ្មី!", "ទំព័រថ្មីត្រូវបានបង្កើតឡើងដោយជោគជ័យ។ អ្នកអាចកែសម្រួលវាបានភ្លាមៗ។");
+        }
+
+        // Update current slide data on input change
+        function updateCurrentSlideData() {
+            if (!slidesData[currentSlideIndex]) return;
+            slidesData[currentSlideIndex].title = document.getElementById('inputTitle').value;
+            slidesData[currentSlideIndex].content = document.getElementById('inputContent').value;
+            slidesData[currentSlideIndex].imageUrl = document.getElementById('inputImageUrl').value;
+            slidesData[currentSlideIndex].style = document.getElementById('inputStyle').value;
+            updateLiveSlidePreview();
+        }
+
+        // Navigation controls between pages in preview
+        function prevPage() {
+            if (currentSlideIndex > 0) {
+                switchPage(currentSlideIndex - 1);
+            }
+        }
+
+        function nextPage() {
+            if (currentSlideIndex < slidesData.length - 1) {
+                switchPage(currentSlideIndex + 1);
+            }
+        }
+
+        // Update live preview display
+        function updateLiveSlidePreview() {
+            const slide = slidesData[currentSlideIndex];
+            if (!slide) return;
+            document.getElementById('previewTitle').innerText = slide.title || 'ចំណងជើងស្លាយ...';
+            document.getElementById('previewContent').innerText = slide.content || 'ខ្លឹមសារ...';
+
+            // Image Handler
+            const imgWrapper = document.getElementById('previewImageWrapper');
+            const imgEl = document.getElementById('previewImage');
+            if (slide.imageUrl && slide.imageUrl.trim() !== '') {
+                imgEl.src = slide.imageUrl;
+                imgWrapper.classList.remove('hidden');
+            } else {
+                imgWrapper.classList.add('hidden');
+            }
+
+            const slideBox = document.getElementById('liveSlideBox');
+            const badge = document.getElementById('previewTagBadge');
+
+            slideBox.className = "my-6 rounded-2xl p-8 text-white shadow-2xl flex flex-col justify-between min-h-[320px] transition duration-500 relative overflow-hidden ";
+            if (slide.style === 'anime') {
+                slideBox.classList.add('bg-gradient-to-br', 'from-pink-300', 'via-rose-300', 'to-purple-400');
+                badge.innerText = 'Anime / Kitty Theme';
+            } else if (slide.style === 'cute') {
+                slideBox.classList.add('bg-gradient-to-br', 'from-pink-400', 'to-purple-500');
+                badge.innerText = 'Cute Theme';
+            } else if (slide.style === 'sweet') {
+                slideBox.classList.add('bg-gradient-to-br', 'from-purple-400', 'to-indigo-500');
+                badge.innerText = 'Sweet Theme';
+            } else if (slide.style === 'simple') {
+                slideBox.classList.add('bg-gradient-to-br', 'from-slate-600', 'to-teal-600');
+                badge.innerText = 'Simple Theme';
+            } else if (slide.style === 'professional') {
+                slideBox.classList.add('bg-gradient-to-br', 'from-slate-800', 'to-indigo-900');
+                badge.innerText = 'Professional Theme';
+            }
+        }
+
+        // AI Assistant Generator function
+        function generateContentWithAI() {
+            const prompt = document.getElementById('aiPromptInput').value.trim();
+            if (!prompt) {
+                showModal("សូមបញ្ចូលប្រធានបទ", "សូមវាយបញ្ចូលប្រធានបទ ឬសំណួរដែលចង់ឱ្យ AI ຊួយបង្កើត។");
+                return;
+            }
+            
+            // Simulate AI generation response
+            slidesData[currentSlideIndex].title = `AI Generated: ${prompt}`;
+            slidesData[currentSlideIndex].content = `1. ការវិភាគស៊ីជម្រៅលើប្រធានបទ ${prompt}\n2. បញ្ហាប្រឈម និងដំណោះស្រាយសំខាន់ៗ\n3. ការអនុវត្តជាក់ស្តែងសម្រាប់និស្សិតសិក្សាស្រាវជ្រាវ\n4. ការសន្និដ្ឋាន និងទស្សនវិស័យអនាគត`;
+            
+            loadSlideToForm(currentSlideIndex);
+            updateLiveSlidePreview();
+            showModal("AI បានបង្កើតរួចរាល់!", `ជំនួយការ AI បានបង្កើតខ្លឹមសារសម្រាប់ប្រធានបទ "${prompt}" ជូនអ្នកដោយជោគជ័យ។`);
+        }
+
+        // Export as PDF action
+        function downloadAsPDF() {
+            showModal("រៀបចំឯកសារ PDF", `ឯកសារស្លាយសរុបចំនួន ${slidesData.length} ទំព័រ ត្រូវបានបង្កើត និងត្រៀមទាញយកជា PDF រួចរាល់។`);
+        }
+
+        // Export as PPTX action
+        function downloadCustomSlide() {
+            showModal("ទាញយក PowerPoint (PPTX)", `ស្លាយរបស់អ្នកចំនួន ${slidesData.length} ទំព័រ ត្រូវបានកញ្ចប់ជាទម្រង់ PPTX សម្រាប់ដាក់បង្ហាញ។`);
+        }
+
+        // Modal Display Functions
+        function showModal(title, message) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = message;
+            const modal = document.getElementById('notificationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeNotificationModal() {
+            const modal = document.getElementById('notificationModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // Template Selection Action
+        function useTemplate(templateName) {
+            slidesData[0].title = templateName;
+            slidesData[0].content = "1. ការណែនាំពីគម្រោង\n2. គោលបំណង និងផែនការសកម្មភាព\n3. លទ្ធផលរំពឹងទុក និងការសន្និដ្ឋាន";
+            switchPage(0);
+            document.getElementById('customizer').scrollIntoView({ behavior: 'smooth' });
+            showModal('បានជ្រើសរើសគំរូ!', `អ្នកបានជ្រើសរើស "${templateName}"។ ឥឡូវនេះអ្នកអាចកែសម្រួល ឬបន្ថែមទំព័រថ្មីបាន។`);
+        }
+
+        // Filtering Templates by Style
+        function filterStyle(style) {
+            document.querySelectorAll('.style-btn').forEach(btn => {
+                btn.className = "style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-white border border-slate-200 text-slate-700 hover:bg-slate-100";
+            });
+            event.target.className = "style-btn px-5 py-2.5 rounded-xl font-medium text-sm transition bg-indigo-600 text-white shadow-md shadow-indigo-100";
+
+            const cards = document.querySelectorAll('.template-card');
+            cards.forEach(card => {
+                if (style === 'all' || card.dataset.style === style) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Filtering Templates by Major
+        function filterMajor(major) {
+            document.querySelectorAll('.major-btn').forEach(btn => {
+                btn.className = "major-btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 px-3.5 py-1.5 rounded-lg transition font-medium";
+            });
+            event.target.className = "major-btn bg-slate-900 text-white px-3.5 py-1.5 rounded-lg transition font-medium";
+
+            const cards = document.querySelectorAll('.template-card');
+            cards.forEach(card => {
+                if (major === 'all' || card.dataset.major === major) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Search Filter
+        function filterTemplates() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.template-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
